@@ -46,9 +46,10 @@
     "foundryIqFilterAddOnEnabled":         { "value": "${FOUNDRY_IQ_FILTER_ADD_ON_ENABLED=false}" },
     "foundryIqMaxOutputDocuments":         { "value": "${FOUNDRY_IQ_MAX_OUTPUT_DOCUMENTS=}" },
 
-    "aiSearchResourceId":                  { "value": null },
-    "aiFoundryStorageAccountResourceId":   { "value": null },
-    "aiFoundryCosmosDBAccountResourceId":  { "value": null },
+    "aiSearchResourceId":                  { "value": "${AI_SEARCH_RESOURCE_ID=}" },
+    "aiFoundryStorageAccountResourceId":   { "value": "${AI_FOUNDRY_STORAGE_ACCOUNT_RESOURCE_ID=}" },
+    "aiFoundryCosmosDBAccountResourceId":  { "value": "${AI_FOUNDRY_COSMOS_DB_ACCOUNT_RESOURCE_ID=}" },
+    "keyVaultResourceId":                  { "value": "${AI_FOUNDRY_KEY_VAULT_RESOURCE_ID=}" },
     
     "deployAiFoundry":                      { "value": "true" },
     "deployAAfAgentSvc":                    { "value": "${DEPLOY_AAF_AGENT_SVC=true}" },

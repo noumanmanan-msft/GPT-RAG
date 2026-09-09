@@ -17,6 +17,22 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class IntegrationPinTests(unittest.TestCase):
+    def test_main_parameters_preserve_existing_foundry_dependencies(self) -> None:
+        parameters = json.loads(
+            (ROOT / "main.parameters.json").read_text(encoding="utf-8")
+        )["parameters"]
+
+        expected_bindings = {
+            "aiSearchResourceId": "${AI_SEARCH_RESOURCE_ID=}",
+            "aiFoundryStorageAccountResourceId": "${AI_FOUNDRY_STORAGE_ACCOUNT_RESOURCE_ID=}",
+            "aiFoundryCosmosDBAccountResourceId": "${AI_FOUNDRY_COSMOS_DB_ACCOUNT_RESOURCE_ID=}",
+            "keyVaultResourceId": "${AI_FOUNDRY_KEY_VAULT_RESOURCE_ID=}",
+        }
+        self.assertEqual(
+            expected_bindings,
+            {key: parameters[key]["value"] for key in expected_bindings},
+        )
+
     def test_manifest_contains_exact_integration_pins(self) -> None:
         manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
         components = {item["name"]: item for item in manifest["components"]}

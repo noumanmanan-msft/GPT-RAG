@@ -1,5 +1,5 @@
 [submodule "infra"]
 	path = infra
-	url = https://github.com/Azure/bicep-ptn-aiml-landing-zone.git
-	branch = v2.5.1
+	url = https://github.com/noumanmanan-msft/bicep-ptn-aiml-landing-zone.git
+	branch = feature/multi-region-foundry
 	ignore = dirty

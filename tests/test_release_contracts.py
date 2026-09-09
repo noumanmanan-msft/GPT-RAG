@@ -23,11 +23,11 @@ class IntegrationPinTests(unittest.TestCase):
 
         self.assertEqual("unreleased", manifest["tag"])
         self.assertEqual(
-            "v2.5.1",
+            "feature/multi-region-foundry",
             manifest["ailz_tag"],
         )
         self.assertEqual(
-            "9cc5859af5c8ab3b31709c9e16e0db11a170a404",
+            "f465c8576af0e40093d90f51bca75f0a87090ef2",
             manifest["ailz_commit"],
         )
         self.assertEqual(
@@ -55,7 +55,7 @@ class IntegrationPinTests(unittest.TestCase):
     def test_gitmodule_and_gitlink_match_landing_zone_integration_pin(self) -> None:
         gitmodules = (ROOT / ".gitmodules").read_text(encoding="utf-8")
         self.assertIn(
-            "branch = v2.5.1",
+            "branch = feature/multi-region-foundry",
             gitmodules,
         )
 
@@ -67,7 +67,7 @@ class IntegrationPinTests(unittest.TestCase):
             text=True,
         )
         self.assertIn(
-            "9cc5859af5c8ab3b31709c9e16e0db11a170a404",
+            "f465c8576af0e40093d90f51bca75f0a87090ef2",
             completed.stdout.strip(),
         )
 
@@ -272,6 +272,10 @@ class LifecycleParityTests(unittest.TestCase):
                 self.assertIn("checkout --detach", content)
                 self.assertIn("^[0-9a-f]{40}$", content)
                 self.assertNotIn("clone --depth 1 --branch", content)
+
+        shell = (scripts / "preProvision.sh").read_text(encoding="utf-8-sig")
+        self.assertIn('next(c["commit"]', shell)
+        self.assertNotIn(r'c[\"commit\"]', shell)
 
     def test_preprovision_hooks_prepare_infra_before_moving_the_pin(self) -> None:
         scripts = ROOT / "scripts"

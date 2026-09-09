@@ -1,8 +1,8 @@
 {
   "tag": "v3.8.3",
   "repo": "https://github.com/azure/gpt-rag.git",
-  "ailz_tag": "v2.5.1",
-  "ailz_commit": "9cc5859af5c8ab3b31709c9e16e0db11a170a404",
+  "ailz_tag": "feature/multi-region-foundry",
+  "ailz_commit": "f465c8576af0e40093d90f51bca75f0a87090ef2",
   "components": [
     {
       "name": "gpt-rag-ui",

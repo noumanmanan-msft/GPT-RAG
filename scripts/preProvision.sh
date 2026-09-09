@@ -67,6 +67,10 @@ if [ $INFRA_CHECKOUT_EXIT -ne 0 ]; then
 fi
 
 echo "${CYAN}Initializing infrastructure submodule...${NC}"
+if ! git submodule sync --recursive; then
+    echo "${YELLOW}Error: Failed to synchronize infrastructure submodule configuration.${NC}"
+    exit 1
+fi
 git submodule update --init --recursive 2>/dev/null
 
 # Fallback: when the repo was scaffolded via 'azd init' (ZIP download), the git
@@ -171,7 +175,7 @@ if [ "$TOPOLOGY_PERSIST_FAILED" = "true" ]; then
 fi
 
 echo "${CYAN}Composing GPT-RAG deployment mode...${NC}"
-HOSTED_SOURCE_COMMIT="$("$PYTHON_CMD" -c 'import json,sys; print(next(c[\"commit\"] for c in json.load(open(sys.argv[1], encoding=\"utf-8\"))[\"components\"] if c[\"name\"] == \"gpt-rag-orchestrator\"))' "$PROJECT_ROOT/manifest.json")"
+HOSTED_SOURCE_COMMIT="$("$PYTHON_CMD" -c 'import json,sys; print(next(c["commit"] for c in json.load(open(sys.argv[1], encoding="utf-8"))["components"] if c["name"] == "gpt-rag-orchestrator"))' "$PROJECT_ROOT/manifest.json")"
 (
     cd "$PROJECT_ROOT" &&
     "$PYTHON_CMD" -m config.deployment.composition \

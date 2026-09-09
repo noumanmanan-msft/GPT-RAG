@@ -60,6 +60,11 @@ if ($infraCheckoutExitCode -ne 0) {
 }
 
 Write-Host "Initializing infrastructure submodule..." -ForegroundColor Cyan
+git submodule sync --recursive
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Error: Failed to synchronize infrastructure submodule configuration." -ForegroundColor Red
+    exit $LASTEXITCODE
+}
 git submodule update --init --recursive 2>$null
 
 # Fallback: when the repo was scaffolded via 'azd init' (ZIP download), the git

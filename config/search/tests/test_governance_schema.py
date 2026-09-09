@@ -78,6 +78,10 @@ class GovernanceSearchSchemaTests(unittest.TestCase):
         rag_index = definitions["indexes"][0]
         fields = {field["name"]: field for field in rag_index["fields"]}
         self.assertIsInstance(fields["contentVector"]["dimensions"], int)
+        self.assertEqual(fields["member_id"]["type"], "Edm.String")
+        self.assertTrue(fields["member_id"]["retrievable"])
+        self.assertTrue(fields["member_id"]["filterable"])
+        self.assertFalse(fields["member_id"]["searchable"])
 
         for name, (expected_type, expected_attributes) in PROVENANCE_FIELDS.items():
             with self.subTest(name=name):

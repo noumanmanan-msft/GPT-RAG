@@ -43,6 +43,7 @@
           ]
         },
         { "name": "chunk_id",                       "type": "Edm.Int32",                "searchable": false, "retrievable": true },
+        { "name": "member_id",                      "type": "Edm.String",               "searchable": false, "retrievable": true, "filterable": true },
         { "name": "content",                        "type": "Edm.String",               "searchable": true,  "retrievable": true, "analyzer": "{{SEARCH_ANALYZER_NAME}}" },
         { "name": "imageCaptions",                  "type": "Edm.String",               "searchable": true,  "retrievable": true, "analyzer": "{{SEARCH_ANALYZER_NAME}}" },
         { "name": "page",                           "type": "Edm.Int32",                "searchable": false, "retrievable": true },
